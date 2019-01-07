@@ -13,6 +13,7 @@ public class GameRowMapper implements RowMapper<Game>{
 	public Game mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Game game = new Game();
 		game.setGameId(rs.getInt("gameId"));
+		game.setGameDate(rs.getDate("date"));
 		game.setPlayerNumber(rs.getInt("playerNumber"));
 		game.setVictory(rs.getString("victory"));
 		game.setVictoryStyle(rs.getString("victoryStyle"));
@@ -25,6 +26,7 @@ public class GameRowMapper implements RowMapper<Game>{
 		game.setLiberal3(rs.getInt("liberal3"));
 		game.setLiberal4(rs.getInt("liberal4"));
 		game.setLiberal5(rs.getInt("liberal5"));
+		game.setLiberal6(rs.getInt("liberal6"));
 		game.setKill1(rs.getInt("kill1"));
 		game.setKill2(rs.getInt("kill2"));
 		game.setMvp(rs.getInt("mvp"));

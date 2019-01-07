@@ -19,7 +19,7 @@ h1, button {
 
 body:before {
     content: '';
-    height: 100%;
+    height: 120%;
     display: inline-block;
     vertical-align: middle;
 }
@@ -30,7 +30,7 @@ body:before {
 
 body {
     background-image: url("img/Wallpaper.jpg");
-    height: 100%;
+    height: 12  0%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

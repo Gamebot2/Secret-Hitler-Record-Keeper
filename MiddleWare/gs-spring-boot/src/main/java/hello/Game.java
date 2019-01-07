@@ -1,8 +1,11 @@
 package hello;
 
+import java.sql.Date;
+
 public class Game {
 	
 	private int gameId;
+	private Date gameDate;
 	private int playerNumber;
 	private String victory;
 	private String victoryStyle;
@@ -15,6 +18,7 @@ public class Game {
 	private int liberal3;
 	private int liberal4;
 	private int liberal5;
+	private int liberal6;
 	private int kill1;
 	private int kill2;
 	private int mvp;
@@ -25,11 +29,12 @@ public class Game {
 		super();
 	}
 
-	public Game(int gameId, int playerNumber, String victory, String victoryStyle, int fascist1, int fascist2,
-			int fascist3, int hitler, int liberal1, int liberal2, int liberal3, int liberal4, int liberal5, int kill1,
-			int kill2, int mvp, int lvp, String notes) {
+	public Game(int gameId, Date gameDate, int playerNumber, String victory, String victoryStyle, int fascist1,
+			int fascist2, int fascist3, int hitler, int liberal1, int liberal2, int liberal3, int liberal4,
+			int liberal5, int liberal6, int kill1, int kill2, int mvp, int lvp, String notes) {
 		super();
 		this.gameId = gameId;
+		this.gameDate = gameDate;
 		this.playerNumber = playerNumber;
 		this.victory = victory;
 		this.victoryStyle = victoryStyle;
@@ -42,6 +47,7 @@ public class Game {
 		this.liberal3 = liberal3;
 		this.liberal4 = liberal4;
 		this.liberal5 = liberal5;
+		this.liberal6 = liberal6;
 		this.kill1 = kill1;
 		this.kill2 = kill2;
 		this.mvp = mvp;
@@ -55,6 +61,14 @@ public class Game {
 
 	public void setGameId(int gameId) {
 		this.gameId = gameId;
+	}
+	
+	public Date getGameDate() {
+		return gameDate;
+	}
+	
+	public void setGameDate(Date gameDate) {
+		this.gameDate = gameDate;
 	}
 
 	public int getPlayerNumber() {
@@ -151,6 +165,14 @@ public class Game {
 
 	public void setLiberal5(int liberal5) {
 		this.liberal5 = liberal5;
+	}
+	
+	public int getLiberal6() {
+		return liberal6;
+	}
+	
+	public void setLiberal6(int liberal6) {
+		this.liberal6 = liberal6;
 	}
 
 	public int getKill1() {

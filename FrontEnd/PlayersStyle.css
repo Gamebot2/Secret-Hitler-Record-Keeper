@@ -1,0 +1,25 @@
+.profile {
+    width: auto;
+    height: 150px;
+    image-orientation: inherit;
+}
+
+body {
+    background-color: #E56148;
+    height: 100%;
+    margin: 0;
+}
+
+md-content {
+    background-color: #E56148;
+}
+
+h1 {
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+    margin: 0;
+    padding-top: 25px;
+}

@@ -5,12 +5,25 @@
         <link rel = "stylesheet" href = "RecordsStyle.css">
         <link rel = "stylesheet" href = "animate.css">
         <link rel = "shortcut icon" href = "img/favicon-16x16.png" type="image/x-icon">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>"
+        <script src = "app.js"></script>
     </head>
-    <body class = "animated fadeIn">
-        <h1>Game Records</h1>
+    <body class = "animated fadeIn" ng-app = "gameApp" ng-controller="gameCtrl">
         <table>
             <tr>
-                <th class = "thin">Date</th>
+                <td class = "titleCell"><h1>Game Records</h1></td>
+                <td class = "buttonCell"><button onclick = "window.location.href='PlayersPage.html'">Players</button></td>
+                <td class = "buttonCell"><button onclick = "window.location.href='InsertPage.html'">Insert Game</button></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th class = "date">Date</th>
                 <th class = "thin withBorder">Player Number</th>
                 <th class = "thin withBorder">Victory</th>
                 <th class = "thin withBorder">Victory Style</th>
@@ -23,31 +36,19 @@
                 <th class = "thin withBorder">LVP</th>
                 <th class = "thicc withBorder">Notes</th>
             </tr>
-            <tr>
-                <td class = "rightBorder">12.23.2018</td>
-                <td>10</td>
-                <td>Fascists</td>
-                <td>Hitler Elected</td>
-                <td>Ansh, Elena, Mia</td>
-                <td>Trevor</td>
-                <td>Lauren, Livia, Kevin, Zoe, Claire</td>
-                <td>Elena</td>
-                <td>Kevin</td>
-                <td>Trevor</td>
-                <td>Zoe</td>
-            </tr>
-            <tr>
-                <td class = "rightBorder">12.23.2018</td>
-                <td>10</td>
-                <td>Fascists</td>
-                <td>Hitler Elected</td>
-                <td>Ansh, Elena, Mia</td>
-                <td>Trevor</td>
-                <td>Lauren, Livia, Kevin, Zoe, Claire</td>
-                <td>Elena</td>
-                <td>Kevin</td>
-                <td>Trevor</td>
-                <td>Zoe</td>
+            <tr ng-repeat = "x in games">
+                <td class = "rightBorder">{{x.gameDate}}</td>
+                <td>{{x.playerNumber}}</td>
+                <td>{{x.victory}}</td>
+                <td>{{x.victoryStyle}}</td>
+                <td>{{x.fascists}}</td>
+                <td>{{x.hitler}}</td>
+                <td>{{x.liberals}}</td>
+                <td>{{x.kill1}}</td>
+                <td>{{x.kill2}}</td>
+                <td>{{x.mvp}}</td>
+                <td>{{x.lvp}}</td>
+                <td>{{x.notes}}</td>
             </tr>
         </table>    
     </body>
