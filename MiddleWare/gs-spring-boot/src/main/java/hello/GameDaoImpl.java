@@ -29,4 +29,9 @@ public class GameDaoImpl implements GameDao {
 		
 	}
 
+	public int addGame(Game g) {
+		String sql = "INSERT INTO games (date, playerNumber, victory, victoryStyle, fascist1, fascist2, fascist3, hitler, liberal1, liberal2, liberal3, liberal4, liberal5, liberal6, kill1, kill2, mvp, lvp, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		return this.jdbcTemplate.update(sql, g.getGameDate(), g.getPlayerNumber(), g.getVictory(), g.getVictoryStyle(), g.getFascist1(), g.getFascist2(), g.getFascist3(), g.getHitler(), g.getLiberal1(), g.getLiberal2(), g.getLiberal3(), g.getLiberal4(), g.getLiberal5(), g.getLiberal6(), g.getKill1(), g.getKill2(), g.getMvp(), g.getLvp(), g.getNotes());
+	}
+
 }

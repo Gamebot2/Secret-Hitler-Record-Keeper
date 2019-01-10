@@ -3,8 +3,14 @@
 
 <head>
     <title>Insert Game</title>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-    <link rel="stylesheet" href="animate.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=    ntserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link rel="stylesheet" href="InsertStyle.css">
     <link rel="shortcut icon" href="img/favicon-16x16.png" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
@@ -13,100 +19,139 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <script src="app.js"></script>
-    <link rel = "stylesheet" href = "InsertStyle.css">
 </head>
 
-<body ng-app="insertApp" ng-controller="insertCtrl" class="md-inline-form">
-    <h1>Insert Game</h1>
-    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-        <div>
-            <md-input-container flex-gt-sm>
-                <label>Enter date</label>
-                <md-datepicker ng-model="user.submissionDate"></md-datepicker>
-            </md-input-container>
-
-            <md-input-container flex-gt-sm>
-                <label>Player Number</label>
-                <input ng-model="user.title">
-            </md-input-container>
-
-            <md-input-container flex-gt-sm>
-                <label>Victory</label>
-                <input ng-model="user.email">
-            </md-input-container>
-
-            <md-input-container flex-gt-sm>
-                    <label>Victory Style</label>
-                    <input ng-model="user.email">
-                </md-input-container>
+<body ng-app="insertApp" ng-controller="insertCtrl">
+    <div class="jumbotron text-center bg-1">
+        <h1>Insert Games</h1>
+    </div>
+    <form>
+        <div class="form-row container-fluid">
+            <div class="col-sm-2">
+                <label for="playerNumber" style = "margin-bottom:1.5em;">Player Number</label>
+                <input id="playerNumber" ng-model = "game.playerNumber" type="number" class="form-control" placeholder="Players" required>
+            </div>
+            <div class="col-sm-2">
+                <label for="victory" style = "margin-bottom:1.5em;">Victory</label>
+                <md-radio-group id="victory" layout = "row" ng-model = "game.victory">
+                    <md-radio-button value='Fascists'>Fascists</md-radio-button>
+                    <md-radio-button value='Liberals' class="md-primary"> Liberals </md-radio-button>
+                </md-radio-group>
+            </div>
+            <div class="col-sm-2">
+                <label for="victoryStyle">Victory Style</label>
+                <md-select ng-model = "game.victoryStyle" ng-hide="game.victory == ''">
+                    <md-option value = "Hitler Elected" ng-hide="game.victory=='Liberals'">Hitler Elected</md-option>
+                    <md-option value = "6 Policies" ng-hide="game.victory=='Liberals'">6 Policies</md-option>
+                    <md-option value = "Hitler Shot" ng-hide="game.victory=='Fascists'">Hitler Shot</md-option>
+                    <md-option value = "5 Policies" ng-hide="game.victory=='Fascists'">5 Policies</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-2" style = "overflow: hidden;">
+                <label for="fascist1">Fascist 1</label>
+                <md-select ng-model = "game.fascist1" ng-show = "game.playerNumber >= 5">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-2">
+                <label for="fascist2" >Fascist 2</label>
+                <md-select ng-model = "game.fascist2" ng-show = "game.playerNumber >= 7">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-2">
+                <label for="fascist3">Fascist 3</label>
+                <md-select ng-model = "game.fascist3" ng-show = "game.playerNumber >= 9">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
         </div>
-    </md-content>
-
-    <md-content layout-padding>
-        <div>
-            <form name="userForm">
-                <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>First name</label>
-                        <input ng-model="user.firstName">
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-                        <input ng-model="theMax">
-                    </md-input-container>
-                </div>
-
-                <md-input-container class="md-block">
-                    <label>Address</label>
-                    <input ng-model="user.address">
-                </md-input-container>
-
-                <md-input-container md-no-float class="md-block">
-                    <input ng-model="user.address2" placeholder="Address 2">
-                </md-input-container>
-
-                <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>City</label>
-                        <input ng-model="user.city">
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>State</label>
-                        <md-select ng-model="user.state">
-                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                {{state.abbrev}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Postal Code</label>
-                        <input name="postalCode" ng-model="user.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/"
-                            md-maxlength="5">
-
-                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                            <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                            <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
-                                code.
-                            </div>
-                            <div ng-message="md-maxlength" class="my-message">
-                                Don't use the long version silly...we don't need to be that specific...
-                            </div>
-                        </div>
-                    </md-input-container>
-                </div>
-
-                <md-input-container class="md-block">
-                    <label>Biography</label>
-                    <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                </md-input-container>
-
-            </form>
-    </md-content>
-
+        <div class = "form-row container-fluid">
+            <div class = "col-sm-2">
+                <label for="hitler">Hitler</label>
+                <md-select ng-model = "game.hitler" >
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-2">
+                <label for="liberal1">Liberal 1</label>
+                <md-select ng-model = "game.liberal1" ng-show = "game.playerNumber >= 5">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-2">
+                <label for="liberal2">Liberal 2</label>
+                <md-select ng-model = "game.liberal2" ng-show = "game.playerNumber >= 5">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>  
+            <div class = "col-sm-2">
+                <label for="liberal3">Liberal 3</label>
+                <md-select ng-model = "game.liberal3" ng-show = "game.playerNumber >= 5">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>  
+            <div class = "col-sm-2">
+                <label for="liberal4">Liberal 4</label>
+                <md-select ng-model = "game.liberal4" ng-show = "game.playerNumber >= 6">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>  
+            <div class = "col-sm-2">
+                <label for="liberal5">Liberal 5</label>
+                <md-select ng-model = "game.liberal5" ng-show = "game.playerNumber >= 8">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>         
+        </div>
+        <div class = "form-row container-fluid">
+            <div class = "col-sm-2">
+                <label for="liberal6">Liberal 6</label>
+                <md-select ng-model = "game.liberal6" ng-show = "game.playerNumber >= 10">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>  
+            <div class = "col-sm-1">
+                <label for="kill1">Kill 1</label>
+                <md-select ng-model = "game.kill1">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>  
+            <div class = "col-sm-1">
+                <label for="kill2">Kill 2</label>
+                <md-select ng-model = "game.kill2">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>
+            <div class = "col-sm-1">
+                <label for="mvp">MVP</label>
+                <md-select ng-model = "game.mvp">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>   
+            <div class = "col-sm-1">
+                <label for="lvp">LVP</label>
+                <md-select ng-model = "game.lvp">
+                    <md-option ng-repeat="player in players" value = "{{player.playerId}}">{{player.name}}</md-option>
+                </md-select>
+            </div>   
+            <div class = "col-sm-6">
+                <label for="notes">Notes</label>
+                <input id="notes" ng-model = "game.notes" type="textarea" class="form-control" placeholder="(Optional)">
+            </div>   
+        </div>
+        <div class = "form-row container-fluid">
+            <div class = "col-sm-6">
+                <p style = "font-weight: bold;">Game Date</p>
+                <md-datepicker id = "date" ng-model="game.gameDate" md-placeholder="Enter date"></md-datepicker>
+            </div>
+            <div class = "col-sm-6">
+                <md-button type = "submit" class = "md-raised md-warn pull-right" ng-click = "onClick()">Submit</md-button>
+            </div>
+        </div>
+    </form>
 </body>
 
 </html>

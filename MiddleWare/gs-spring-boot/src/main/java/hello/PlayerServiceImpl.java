@@ -36,6 +36,7 @@ public class PlayerServiceImpl implements PlayerService {
 			String d = p.getDesc();
 			String a = p.getActive();
 			PlayerDisplayData pd = new PlayerDisplayData();
+			pd.setId(p.getPlayerId());
 			pd.setName(s);
 			pd.setDesc(d);
 			pd.setActive(a);
@@ -171,6 +172,14 @@ public class PlayerServiceImpl implements PlayerService {
 			}
 		}
 		return toReturn;
+	}
+	
+	public int addPlayer(Player p) {
+		return playerDao.addPlayer(p);
+	}
+	
+	public int removePlayer(int id) {
+		return playerDao.removePlayer(id);
 	}
 
 }

@@ -1,41 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Records</title>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-        <link rel="stylesheet" href="animate.css">
-        <link rel="shortcut icon" href="img/favicon-16x16.png" type="image/x-icon">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
-        <script src="app.js"></script>
-        <link rel = "stylesheet" href = "PlayersStyle.css">
-    </head>
-    <body ng-app = "playerApp" ng-controller = "playerCtrl">
-        <h1>Players and Statistics</h1>
-        <md-content class = "md-padding" layout = "row" layout-wrap>
-            <div flex = "25"  ng-repeat = "player in players">
-                <md-card md-theme = "'dark-grey'">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class = "md-headline">{{player.name}}</span>
-                            <span class = "md-subhead">{{player.desc}}</span>
-                        </md-card-title-text>
-                        <md-card-title-media>
-                            <img class = "profile" src = "/img/{{player.name}}.jpg" alt = "No Image Found">                        </md-card-title-media>
-                    </md-card-title>
-                    <md-card-content>
-                        <p>Win Percentage: {{player.winPercentage}}%</p>
-                        <p>Games Played: {{player.gamesPlayed}}</p>
-                        <p>MVP Count: {{player.mvpCount}}</p>
-                        <p>LVP Count: {{player.lvpCount}}</p>
-                    </md-card-content>
-                </md-card>
+
+<head>
+    <title>Records</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon-16x16.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <link rel="stylesheet" href="PlayersStyle.css">
+    <script src="app.js"></script>
+</head>
+
+<body ng-app="playerApp" ng-controller="playerCtrl">
+    <h1>Players and Statistics</h1>
+    <md-content class="md-padding" layout="row" layout-wrap>
+        <div flex="25" ng-repeat="player in players">
+            <md-card md-theme="'dark-grey'">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{player.name}}</span>
+                        <span class="md-subhead">{{player.desc}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <img class="profile" src="img/{{player.name}}.jpg" alt="No Image Found"> </md-card-title-media>
+                </md-card-title>
+                <md-card-content>
+                    <p>Win Percentage: {{player.winPercentage}}%</p>
+                    <p>Games Played: {{player.gamesPlayed}}</p>
+                    <p>MVP Count: {{player.mvpCount}}</p>
+                    <p>LVP Count: {{player.lvpCount}}</p>
+                </md-card-content>
+                <md-card-actions layout = "row" layout-align = "end center">
+                    <md-button class = "md-raised md-accent" ng-click = "remove(player)">Delete Player</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+    <div class="text-center">
+        <h1>Insert Player</h1>
+    </div>
+    <div class="container">
+        <div class="form-row text-center">
+            <div class="col-sm-6">
+                <input type="text" ng-model = "player.name" class="form-control" placeholder="Full Name">
             </div>
-        </md-content>
-    </body>
+            <div class="col-sm-6">
+                <input type="text" ng-model = "player.desc" class="form-control" placeholder="Description">
+            </div>
+        </div>
+        <br><br>
+        <div class = "form-row">
+            <div class = "pull-right">
+                <md-button class = "md-raised md-warn pull-right" ng-click = "createPlayer()">Submit</md-button>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

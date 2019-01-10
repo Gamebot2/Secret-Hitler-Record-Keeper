@@ -1,6 +1,7 @@
 package hello;
 
 public class PlayerDisplayData {
+	private int id;
 	private String name;
 	private String desc;
 	private String active;
@@ -37,9 +38,13 @@ public class PlayerDisplayData {
 		this.active = active;
 	}
 
+	public int getId() {
+		return id;
+	}
 
-
-
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getDesc() {
 		return desc;

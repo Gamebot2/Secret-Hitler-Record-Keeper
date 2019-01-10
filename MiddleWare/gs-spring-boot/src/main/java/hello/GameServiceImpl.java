@@ -99,4 +99,8 @@ public class GameServiceImpl implements GameService {
 		
 	}
 
+	public int addGame(Game game) {
+		return gameDao.addGame(game);
+	}
+
 }

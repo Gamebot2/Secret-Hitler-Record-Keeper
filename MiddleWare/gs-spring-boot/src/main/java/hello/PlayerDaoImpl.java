@@ -21,4 +21,19 @@ public class PlayerDaoImpl implements PlayerDao {
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}
 
+	public int addPlayer(Player p) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO players (playerName, playerDesc, active) VALUES (?, ?, ?);";
+		this.jdbcTemplate.update(sql, p.getName(), p.getDesc(), "active");
+		return 0;
+	}
+
+	public int removePlayer(int id) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM players WHERE playerId = " + id;
+		return this.jdbcTemplate.update(sql);
+	}
+
+
+
 }
