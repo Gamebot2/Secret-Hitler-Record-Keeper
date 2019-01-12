@@ -25,12 +25,17 @@ body:before {
 }
 
 .spacer {
-    height: 160px;
+    height: 170px;
+}
+
+.signupSpacer {
+    height: 90px;
 }
 
 body {
-    background-image: url("img/Wallpaper.jpg");
-    height: 12  0%;
+    background-image: url("../img/Wallpaper.jpg");
+    height: 100%;
+    width: 90%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

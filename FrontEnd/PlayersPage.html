@@ -19,12 +19,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-    <link rel="stylesheet" href="PlayersStyle.css">
-    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles/PlayersStyle.css">
+    <script src="scripts/app.js"></script>
 </head>
 
 <body ng-app="playerApp" ng-controller="playerCtrl">
-    <h1>Players and Statistics</h1>
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-sm-10">
+                <h1 style = "font-weight: bold;">Players and Statistics</h1>
+            </div>
+            <div class = "col-sm-2">
+                <input placeholder = "Deletion Password" style = "margin-top: 20px;" type = "password" ng-model = "password" class = "form-control">
+            </div>
+        </div>
+    </div>
+    
     <md-content class="md-padding" layout="row" layout-wrap>
         <div flex="25" ng-repeat="player in players">
             <md-card md-theme="'dark-grey'">
@@ -34,7 +44,7 @@
                         <span class="md-subhead">{{player.desc}}</span>
                     </md-card-title-text>
                     <md-card-title-media>
-                        <img class="profile" src="img/{{player.name}}.jpg" alt="No Image Found"> </md-card-title-media>
+                        <img class="profile" src="img/{{player.name}}.JPG" alt="No Image Found"> </md-card-title-media>
                 </md-card-title>
                 <md-card-content>
                     <p>Win Percentage: {{player.winPercentage}}%</p>
@@ -43,7 +53,7 @@
                     <p>LVP Count: {{player.lvpCount}}</p>
                 </md-card-content>
                 <md-card-actions layout = "row" layout-align = "end center">
-                    <md-button class = "md-raised md-accent" ng-click = "remove(player)">Delete Player</md-button>
+                    <md-button ng-show="password=='ctciDelete123'" class = "md-raised md-accent" ng-click = "remove(player)">Delete Player</md-button>
                 </md-card-actions>
             </md-card>
         </div>

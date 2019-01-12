@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	public final String webOrigin = "http://localhost:8080";
+	public final String webOrigin = "http://shark.us-east-1.elasticbeanstalk.com";
 
 	@Autowired
 	private GameService gameService;
