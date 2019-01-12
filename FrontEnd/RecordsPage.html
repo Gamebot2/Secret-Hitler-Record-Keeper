@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Records</title>
-        <link rel = "stylesheet" href = "RecordsStyle.css">
-        <link rel = "stylesheet" href = "animate.css">
+        <link rel = "stylesheet" href = "styles/RecordsStyle.css">
+        <link rel = "stylesheet" href = "styles/animate.css">
         <link rel = "shortcut icon" href = "img/favicon-16x16.png" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
@@ -11,7 +11,7 @@
   		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>"
-        <script src = "app.js"></script>
+        <script src = "scripts/app.js"></script>
     </head>
     <body class = "animated fadeIn" ng-app = "gameApp" ng-controller="gameCtrl">
         <table>
@@ -36,7 +36,7 @@
                 <th class = "thin withBorder">LVP</th>
                 <th class = "thicc withBorder">Notes</th>
             </tr>
-            <tr ng-repeat = "x in games">
+            <tr ng-repeat = "x in games | orderBy : x.gameDate : true">
                 <td class = "rightBorder">{{x.gameDate}}</td>
                 <td>{{x.playerNumber}}</td>
                 <td>{{x.victory}}</td>

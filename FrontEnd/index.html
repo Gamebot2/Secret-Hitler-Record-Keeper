@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html>
-	<head>
-        <title>Secret Hitler Records</title>
-        <link rel = "stylesheet" href = "HomeStyle.css">
-        <link rel = "stylesheet" href = "animate.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel = "shortcut icon" href = "img/favicon-16x16.png" type="image/x-icon">
-    </head>
-    <body>
-        <div class = "spacer"></div>
-        <div class = "text">
-            <h1 class = "animated fadeInDown">Secret Hitler</h1><h1 class = "animated fadeInDown">Records</h1>
-            <button class = "animated fadeInUp" onclick="window.location.href='RecordsPage.html'">Enter Here</button>
-        </div>
-        <div class = "spacer"></div>
-    </body>
+<html ng-app="sharkApp">
+
+<head>
+    <title>Secret Hitler Records</title>
+    <link rel="stylesheet" href="styles/HomeStyle.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/favicon-16x16.png" type="image/x-icon">
+</head>
+
+<!-- This is the home page of the application: it should have a button which leads to login -->
+
+<body>
+    <div class="spacer"></div>
+    <div class="text">
+        <h1 class="animated fadeInDown">Secret Hitler</h1>
+        <h1 class="animated fadeInDown">Records</h1>
+        <button class="animated fadeInUp" onclick="window.location.href='login.html'">Enter Here</button>
+    </div>
+    <div class="spacer"></div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://rawgit.com/bsalex/angular-loading-overlay/master/dist/angular-loading-overlay.js"></script>
+
+    <!-- AWS Cognito -->
+    <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+    <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js"></script>
+
+    <!-- App -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/signup.js"></script>
+    <script src="scripts/activate.js"></script>
+</body>
+
 </html>

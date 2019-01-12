@@ -1,5 +1,62 @@
+'use strict';
+const url = "http://sharkappserver.us-east-1.elasticbeanstalk.com/"
 
-const url = "http://localhost:5000/"
+var sharkApp = angular.module('sharkApp', ['ngRoute']);
+
+sharkApp.service('cognitoService', function () {
+
+    // Region
+    AWS.config.region = 'us-east-1';
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:9c2935c6-770c-4ec2-b833-eeb1dc2ed839'
+    });
+
+    // Cognito User Pool Id
+    AWSCognito.config.region = 'us-east-1';
+    AWSCognito.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:9c2935c6-770c-4ec2-b833-eeb1dc2ed839 '
+    });
+
+    this.getUserPool = function () {
+        var poolData = {
+            UserPoolId: 'us-east-1_MYybNGahA',
+            ClientId: '3tbofej2l1nhuer11clglmtogn'
+        };
+        var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+        return userPool;
+    };
+
+    this.getUser = function (userPool, username) {
+        var userData = {
+            Username: username,
+            Pool: userPool
+        };
+        var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+        return cognitoUser;
+    };
+
+    this.getAuthenticationDetails = function (username, password) {
+        var authenticationData = {
+            Username: username,
+            Password: password
+        };
+        var authenticationDetails = new AWSCognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
+        return authenticationDetails;
+    };
+
+    this.getUserAttributes = function () {
+        var attributes = [];
+        for (var i = 0; i < arguments.length; i++) {
+            var attr = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(arguments[i]);
+            attributes.push(attr);
+        }
+        return attributes;
+    };
+
+});
+
+
+
 
 var app = angular.module('gameApp', ['ngRoute']);
 
@@ -47,12 +104,12 @@ app2.controller('playerCtrl', function ($scope, $http) {
         location.reload();
     }
 
-    $scope.remove = function(player) {
+    $scope.remove = function (player) {
         console.log("This is so lit " + player.id);
         $http.get(url + "removePlayer?Id=" + player.id)
-        .then(function(response) {
-            console.log(response);
-        });
+            .then(function (response) {
+                console.log(response);
+            });
         location.reload();
     };
 });
@@ -73,7 +130,7 @@ app3.controller('insertCtrl', function ($scope, $http) {
         });
 
 
-    var modUrl = url + 'addGame';    
+    var modUrl = url + 'addGame';
     $scope.onClick = () => {
         console.log($scope.game);
         try {
@@ -94,6 +151,8 @@ app3.controller('insertCtrl', function ($scope, $http) {
         catch (err) {
             console.log(err);
         }
+
+        document.location.href = "RecordsPage.html";
     }
 
 });
