@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	public final String webOrigin = "http://shark.us-east-1.elasticbeanstalk.com";
 
 	@Autowired
 	private GameService gameService;
@@ -21,14 +20,14 @@ public class HelloController {
 	@Autowired
 	private PlayerService playerService;
 
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/")
 	public String index() {
 		return "Greetings from Deez Boot!";
 	}
 
 	// Retrieves all pure game data in the database
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/games")
 	public List<Game> getAllGames() {
 		System.out.println("method getAllGames() called");
@@ -36,7 +35,7 @@ public class HelloController {
 	}
 
 	// Retrieves a game by its id number
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/game")
 	public Game getGameById(@RequestParam("Id") int GameId) {
 		System.out.println("method getGameById() called on id " + GameId);
@@ -44,7 +43,7 @@ public class HelloController {
 	}
 
 	// Retrieves modified game data from the database for displaying
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/gamesDisplay")
 	public List<GameDisplayData> getAllGamesDisplay() {
 		System.out.println("method getAlGamesDisplay() called");
@@ -52,7 +51,7 @@ public class HelloController {
 	}
 
 	// Retrives Raw Player Data
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/players")
 	public List<Player> getAllPlayers() {
 		System.out.println("method getAllPlayers() called");
@@ -60,7 +59,7 @@ public class HelloController {
 	}
 
 	// Retrieves Player Display Data
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/playersDisplay")
 	public Collection<PlayerDisplayData> getAllPlayersDisplay() {
 		System.out.println("method getAllPlayersDisplay() Called");
@@ -68,7 +67,7 @@ public class HelloController {
 	}
 
 	// Adds a player to the database
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/addPlayer")
 	public int addPlayer(@RequestBody(required = false) Player player) {
 		System.out.println("method addPlayer() called");
@@ -78,7 +77,7 @@ public class HelloController {
 	}
 	
 	//Adds a game to the database
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/addGame")
 	public int addGame(@RequestBody(required = true) Game game) {
 		System.out.println("Method addGame() called");
@@ -86,7 +85,7 @@ public class HelloController {
 	}
 	
 	//Removes a player from the database
-	@CrossOrigin(origins = webOrigin)
+	@CrossOrigin
 	@RequestMapping("/removePlayer")
 	public int removePlayer(@RequestParam("Id") int id) {
 		System.out.println("Method removePlayer() called on player with id " + id);
