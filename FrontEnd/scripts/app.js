@@ -1,5 +1,5 @@
 'use strict';
-const url = "http://sharkappserver.us-east-1.elasticbeanstalk.com/"
+const url = "http://localhost:5000/"
 
 var sharkApp = angular.module('sharkApp', ['ngRoute']);
 
@@ -57,15 +57,56 @@ sharkApp.service('cognitoService', function () {
 
 
 
+sharkApp.controller('gameCtrl', function ($scope, $http, cognitoService) {
 
-var app = angular.module('gameApp', ['ngRoute']);
+    var userPool = cognitoService.getUserPool();
 
-app.controller('gameCtrl', function ($scope, $http) {
-    $http.get(url + "gamesDisplay")
-        .then(function (response) {
-            $scope.games = response.data;
-            console.log(response.data);
+    var currentUser = userPool.getCurrentUser();
+
+
+    if (currentUser != null) {
+        currentUser.getSession(function (err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
         });
+        $http.get(url + "gamesDisplay")
+            .then(function (response) {
+                $scope.games = response.data;
+                $scope.games.sort(function(a, b) {
+                    return new Date(b.gameDate) - new Date(a.gameDate);
+                });
+                $scope.totalItems = response.data.length;
+                console.log(response.data);
+            });
+    }
+
+    $scope.signOut = function () {
+        var userPool = cognitoService.getUserPool();
+
+        var currentUser = userPool.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.signOut();
+        }
+        document.location.href = "login.html";
+    }
+
+    $scope.viewby = 10;
+
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = $scope.viewby;
+
+    $scope.pageChanged = function () {
+        console.log('Page changed to ' + $scope.currentPage);
+    }
+
+    $scope.setItemsPerPage = function (viewby) {
+        $scope.itemsPerPage = viewby;
+        $scope.currentPage = 1;
+    }
+
 });
 
 var app2 = angular.module('playerApp', ['ngRoute', 'ngMaterial']);

@@ -34,7 +34,10 @@
 
     <div class="signupSpacer"></div>
     <div class="text">
-        <h1 style = "padding-left:20px;" class="animated fadeInDown">Sign Up</h1><br>
+        <h1 style = "padding-left:20px;" class="animated fadeInDown">Sign Up</h1>
+        <div class = "row">
+                <div style = "margin-left: 20px;" id="errorMessage" class="alert alert-danger col-sm-2" ng-show="errorMessage">{{errorMessage}}</div><br>
+        </div>
         <div class="row">
             <div class="col-sm-2">
                 <input id = "name" style = "margin-left:20px;" class="form-control animated fadeInUp" type="text" placeholder="Name"><br>

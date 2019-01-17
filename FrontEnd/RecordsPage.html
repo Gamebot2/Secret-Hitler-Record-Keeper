@@ -1,55 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Records</title>
-        <link rel = "stylesheet" href = "styles/RecordsStyle.css">
-        <link rel = "stylesheet" href = "styles/animate.css">
-        <link rel = "shortcut icon" href = "img/favicon-16x16.png" type="image/x-icon">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>"
-        <script src = "scripts/app.js"></script>
-    </head>
-    <body class = "animated fadeIn" ng-app = "gameApp" ng-controller="gameCtrl">
-        <table>
-            <tr>
-                <td class = "titleCell"><h1>Game Records</h1></td>
-                <td class = "buttonCell"><button onclick = "window.location.href='PlayersPage.html'">Players</button></td>
-                <td class = "buttonCell"><button onclick = "window.location.href='InsertPage.html'">Insert Game</button></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th class = "date">Date</th>
-                <th class = "thin withBorder">Player Number</th>
-                <th class = "thin withBorder">Victory</th>
-                <th class = "thin withBorder">Victory Style</th>
-                <th  class = "withBorder">Fascists</th>
-                <th class = "withBorder">Hitler</th>
-                <th class = "withBorder">Liberals</th>
-                <th class = "thin withBorder">Kill 1</th>
-                <th class = "thin withBorder">Kill 2</th>
-                <th class = "thin withBorder">MVP</th>
-                <th class = "thin withBorder">LVP</th>
-                <th class = "thicc withBorder">Notes</th>
-            </tr>
-            <tr ng-repeat = "x in games | orderBy : x.gameDate : true">
-                <td class = "rightBorder">{{x.gameDate}}</td>
-                <td>{{x.playerNumber}}</td>
-                <td>{{x.victory}}</td>
-                <td>{{x.victoryStyle}}</td>
-                <td>{{x.fascists}}</td>
-                <td>{{x.hitler}}</td>
-                <td>{{x.liberals}}</td>
-                <td>{{x.kill1}}</td>
-                <td>{{x.kill2}}</td>
-                <td>{{x.mvp}}</td>
-                <td>{{x.lvp}}</td>
-                <td>{{x.notes}}</td>
-            </tr>
-        </table>    
-    </body>
+
+<head>
+    <title>Records</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/RecordsStyle.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="shortcut icon" href="img/favicon-16x16.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <!-- AWS Cognito -->
+    <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+    <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js"></script>
+    <script src="scripts/app.js"></script>
+</head>
+
+<body class="animated fadeIn" ng-app="sharkApp" ng-controller="gameCtrl">
+    <table>
+        <tr>
+            <td class="titleCell">
+                <h1 style = "font-weight: bold;">Game Records</h1>
+            </td>
+            <td class="buttonCell"><button onclick="window.location.href='PlayersPage.html'">Players</button></td>
+            <td class="buttonCell"><button onclick="window.location.href='InsertPage.html'">Insert Game</button></td>
+            <td class = "buttonCell"><button ng-click ="signOut()">Sign Out</button></td>
+        </tr>
+    </table>
+    <table style = "margin-top: 20px;">
+        <tr>
+            <th class="date">Date</th>
+            <th class="thin withBorder">Player Number</th>
+            <th class="thin withBorder">Victory</th>
+            <th class="thin withBorder">Victory Style</th>
+            <th class="withBorder">Fascists</th>
+            <th class="withBorder">Hitler</th>
+            <th class="withBorder">Liberals</th>
+            <th class="thin withBorder">Kill 1</th>
+            <th class="thin withBorder">Kill 2</th>
+            <th class="thin withBorder">MVP</th>
+            <th class="thin withBorder">LVP</th>
+            <th class="thicc withBorder">Notes</th>
+        </tr>
+        <tr ng-repeat="x in games.slice(((currentPage-1)*itemsPerPage), ((currentPage) * itemsPerPage))">
+            <td class="rightBorder">{{x.gameDate}}</td>
+            <td>{{x.playerNumber}}</td>
+            <td>{{x.victory}}</td>
+            <td>{{x.victoryStyle}}</td>
+            <td>{{x.fascists}}</td>
+            <td>{{x.hitler}}</td>
+            <td>{{x.liberals}}</td>
+            <td>{{x.kill1}}</td>
+            <td>{{x.kill2}}</td>
+            <td>{{x.mvp}}</td>
+            <td>{{x.lvp}}</td>
+            <td>{{x.notes}}</td>
+        </tr>
+    </table>
+    <pagination total-items = "totalItems" ng-model = "currentPage" ng-change = "pageChanged()"
+        class = "pagination-sm" items-per-page="itemsPerPage"></pagination><br>
+    View <select ng-model="viewby" ng-change = "setItemsPerPage(viewby)">
+    <option>10</option><option>15</option><option>20</option> 
+    </select> records at a time.
+    
+</body>
+
 </html>
